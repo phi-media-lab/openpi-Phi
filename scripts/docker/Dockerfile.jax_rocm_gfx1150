@@ -1,0 +1,42 @@
+FROM rocm/jax-community:rocm6.3.2-jax0.5.0-py3.12.8
+
+WORKDIR /workspace/openpi
+
+ENV HSA_OVERRIDE_GFX_VERSION=11.0.0
+ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=1
+
+RUN python -m pip install --upgrade pip
+RUN python -m pip install \
+    torch==2.11.0 \
+    jax==0.5.0 \
+    flax==0.10.2 \
+    orbax-checkpoint==0.11.13 \
+    transformers==4.53.2 \
+    sentencepiece \
+    ml_collections==1.0.0 \
+    tyro \
+    wandb==0.26.0 \
+    beartype==0.19.0 \
+    chex==0.1.90 \
+    jaxtyping==0.2.36 \
+    treescope \
+    einops \
+    dm-tree \
+    equinox==0.11.8 \
+    flatbuffers \
+    "fsspec[gcs]" \
+    imageio \
+    pillow \
+    tqdm-loggable \
+    typing-extensions \
+    rich \
+    polars \
+    "numpy<2.0.0" \
+    numpydantic \
+    opencv-python \
+    gym-aloha \
+    augmax \
+    filelock
+
+CMD ["bash"]
