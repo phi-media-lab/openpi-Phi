@@ -185,6 +185,20 @@ Interpretation:
 - Full policy re-inference runs at about `9.1 Hz`.
 - Since `action_horizon = 50`, the action chunk emission rate is about `457 steps/s`.
 
+## Reproducible Benchmark Command
+
+After downloading the full checkpoint locally, a reproducible benchmark can be run with:
+
+```bash
+PYTHONPATH=/workspace/openpi/src /pyenv/versions/3.12.8/bin/python \
+  scripts/benchmark_policy.py \
+  --config pi05_aloha \
+  --checkpoint-dir /workspace/pi05_base \
+  --example aloha \
+  --warmup 10 \
+  --runs 100
+```
+
 ## Recommended Next Commits on This Branch
 
 1. Keep the `data_loader.py` lazy `lerobot` import fix as a standalone commit.
