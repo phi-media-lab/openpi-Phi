@@ -11,9 +11,11 @@ This document captures the validated bring-up flow for running `openpi` on an AM
 
 ## Repository Layout Used During Bring-Up
 
-- Upstream working tree: `/mnt/models_alehe/phi-fbsh/openpi`
-- Fork working tree: `/mnt/models_alehe/phi-fbsh/openpi-Phi`
-- Local cached checkpoint root: `/mnt/models_alehe/phi-fbsh/openpi-cache`
+The exact paths below are from the validation machine and are examples, not required locations:
+
+- Upstream working tree example: `/mnt/models_alehe/phi-fbsh/openpi`
+- Fork working tree example: `/mnt/models_alehe/phi-fbsh/openpi-Phi`
+- Local cached checkpoint root example: `/mnt/models_alehe/phi-fbsh/openpi-cache`
 
 ## What Worked and What Did Not
 
@@ -39,10 +41,10 @@ Required container flags:
 --device=/dev/kfd \
 --device=/dev/dri \
 --security-opt seccomp=unconfined \
---group-add 992
+--group-add "$(getent group render | cut -d: -f3)"
 ```
 
-The `render` group on the machine had GID `992` during validation.
+On the validation machine, the host `render` group had GID `992`.
 
 ## Minimal JAX ROCm Validation
 
@@ -117,6 +119,12 @@ print(path)
 ```
 
 Validated local checkpoint path:
+
+```text
+<OPENPI_DATA_HOME>/openpi-assets/checkpoints/pi05_base
+```
+
+On the validation machine, this resolved to:
 
 ```text
 /mnt/models_alehe/phi-fbsh/openpi-cache/openpi-assets/checkpoints/pi05_base
